@@ -8,13 +8,13 @@ import Tv from './Routes/Tv';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: process.env.PUBLIC_URL,
     element: <Header />,
     children: [
       { path: '', element: <Home /> },
-      { path: '/tv', element: <Tv /> },
-      { path: '/search', element: <Search /> },
-      { path: '/movies/:id', element: <Home /> },
+      { path: 'tv', element: <Tv /> },
+      { path: 'search', element: <Search /> },
+      { path: 'movies/:id', element: <Home /> },
     ],
   },
 ]);
