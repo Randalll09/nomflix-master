@@ -65,7 +65,7 @@ const Search = styled.form`
     fill: ${({ theme }) => theme.white.lighter};
     width: 16px;
     z-index: 10;
-
+    cursor: pointer;
     path {
       fill: ${({ theme }) => theme.white.lighter};
     }
@@ -127,16 +127,25 @@ const Header = () => {
     navigate('/search?keyword=' + data.search);
   };
   const toggleSearch = () => {
-    setSearchOpen((prev) => !prev);
-    if (searchOpen) {
+    if (search) {
+      onValid({ search: search });
+      setSearch('');
+      setSearchOpen(false);
       inputAnimation.start({
         scaleX: 0,
       });
     } else {
-      inputRef.current?.focus();
-      inputAnimation.start({
-        scaleX: 1,
-      });
+      setSearchOpen((prev) => !prev);
+      if (searchOpen) {
+        inputAnimation.start({
+          scaleX: 0,
+        });
+      } else {
+        inputRef.current?.focus();
+        inputAnimation.start({
+          scaleX: 1,
+        });
+      }
     }
   };
   useEffect(() => {
@@ -171,10 +180,10 @@ const Header = () => {
               <Link to={'/'}>Home</Link>
               {homeMatch && <Circle layoutId="cir" />}
             </Item>
-            <Item>
+            {/* <Item>
               <Link to="/tv">TV Shows</Link>
               {tvMatch && <Circle layoutId="cir" />}
-            </Item>
+            </Item> */}
           </Items>
         </Col>
         <Col>

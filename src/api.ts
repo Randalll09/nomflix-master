@@ -44,6 +44,7 @@ export interface IMovieInfo {
   name: string;
   poster_path: string;
   runtime: number;
+  release_date: string;
 }
 
 export function getMovies() {
@@ -59,6 +60,6 @@ export const getMovieInfo = (id: string) => {
 
 export const getSearch = (search: string | null) => {
   return fetch(
-    `${BASE_PATH}/search/multi?api_key=${API_KEY}&query=${search}`
+    `${BASE_PATH}/search/movie?api_key=${API_KEY}&query=${search}`
   ).then((res) => res.json());
 };

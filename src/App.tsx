@@ -1,20 +1,20 @@
-import React from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Header from './Components/Header';
 import Home from './Routes/Home';
 import Search from './Routes/Search';
 import Tv from './Routes/Tv';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: process.env.PUBLIC_URL,
+    path: '/',
     element: <Header />,
     children: [
-      { path: '', element: <Home /> },
-      { path: 'tv', element: <Tv /> },
-      { path: 'search', element: <Search /> },
-      { path: 'movies/:id', element: <Home /> },
+      { path: '/', element: <Home /> },
+      { path: '/tv', element: <Tv /> },
+      { path: '/search', element: <Search /> },
+      { path: '/search/movie/:id', element: <Search /> },
+      { path: '/movies/:id', element: <Home /> },
     ],
   },
 ]);

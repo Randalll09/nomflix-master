@@ -56,6 +56,7 @@ const Header = styled.header<{ bg: string }>`
 `;
 const Info = styled.div`
   position: relative;
+  color: white;
   z-index: 2;
   h2 {
     text-align: center;
@@ -66,6 +67,7 @@ const InfoMore = styled.div`
   position: absolute;
   bottom: 48px;
   left: 48px;
+  color: white;
   ul {
     display: flex;
     gap: 24px;
@@ -78,16 +80,12 @@ const InfoMore = styled.div`
   }
 `;
 
-const MovieModal: React.FC<{ id: string }> = ({ id = '' }) => {
+const SearchModal: React.FC<{ id: string }> = ({ id = '' }) => {
   const { data } = useQuery<IMovieInfo>(['movie', id], () => getMovieInfo(id));
-  const navigate = useNavigate();
+  console.log(data);
   return (
     <>
-      <Overlay
-        onClick={() => navigate('/')}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      ></Overlay>
+      <Overlay animate={{ opacity: 1 }} exit={{ opacity: 0 }}></Overlay>
       {data ? (
         <Div layoutId={id} key={id}>
           <Header bg={makeImgPath(data.backdrop_path)}>
@@ -98,13 +96,15 @@ const MovieModal: React.FC<{ id: string }> = ({ id = '' }) => {
             </Info>
           </Header>
           <InfoMore>
-            <h3>Runtime: {data.runtime} min</h3>
-            <h3>Release Date: {data.release_date.replaceAll('-', '. ')}</h3>
+            {data.runtime ? <h3>Runtime: {data.runtime} min</h3> : null}
+            {data.release_date ? (
+              <h3>Release Date: {data.release_date.replaceAll('-', '. ')}</h3>
+            ) : null}
             <h3>Genre</h3>
             <ul>
-              {data.genres.map((v) => (
-                <li key={v.id}>{v.name}</li>
-              ))}
+              {data.genres
+                ? data.genres.map((v) => <li key={v.id}>{v.name}</li>)
+                : null}
             </ul>
           </InfoMore>
         </Div>
@@ -113,4 +113,4 @@ const MovieModal: React.FC<{ id: string }> = ({ id = '' }) => {
   );
 };
 
-export default MovieModal;
+export default SearchModal;

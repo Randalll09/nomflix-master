@@ -8,7 +8,8 @@ import MovieModal from '../Components/MovieModal';
 import { AnimatePresence } from 'framer-motion';
 
 const Div = styled.div`
-  height: 200vh;
+  height: 100vh;
+  overflow: hidden;
   background-color: ${({ theme }) => theme.black.veryDark};
   color: #fff;
 `;
@@ -22,7 +23,7 @@ const Banner = styled.div<{ bg: string }>`
   padding: 60px;
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
     url(${({ bg }) => bg});
-  padding-bottom: 150px;
+  padding-bottom: 350px;
   background-position: center;
   background-size: cover;
 `;
